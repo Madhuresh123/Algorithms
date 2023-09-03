@@ -3,21 +3,25 @@ public:
     int maxProduct(vector<int>& nums) {
 
         int maxPro = INT_MIN;
-        int prePro = 1;
-        int sefPro =1;
+        int prefixPro = 1;
+        int suffixPro =1;
 
-       for(int i=0;i<nums.size();i++){
+        for(int i=0;i<nums.size();i++){
 
-           prePro *= nums[i];
-           sefPro *= nums[nums.size()-i-1];
+                prefixPro *= nums[i];
+                suffixPro *= nums[nums.size()-1-i];
 
-            maxPro = max(maxPro, prePro); 
-            maxPro = max(maxPro, sefPro); 
+                maxPro = max(maxPro, max(prefixPro,suffixPro));
 
-            if(prePro == 0) prePro=1;
-            if(sefPro == 0) sefPro=1;
+                if(prefixPro == 0 ){
+                    prefixPro = 1;
+                }
 
-       }
+                if(suffixPro == 0 ){
+                    suffixPro = 1;
+                }
+        }
+
         return maxPro;
     }
 };
