@@ -13,8 +13,8 @@ public:
             arr[t[i]] -=1;
         }
 
-        for(int i=0;i<256;i++){
-            if(arr[i] != 0)
+        for(int ele: arr){
+            if(ele != 0)
             return false;
         }
 
