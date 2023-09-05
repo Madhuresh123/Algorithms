@@ -1,27 +1,24 @@
 class Solution {
 public:
     string frequencySort(string s) {
-        vector<int> arr(128, 0);
-        string ans = "";
 
-        // Count the frequency of each character
-        for (char c : s) {
-            arr[c]++;
-        }
+        unordered_map<char,int> m;
+        string ans;
 
-        vector<pair<int, int>> charFrequency;
-        for (int i = 0; i < 128; i++) {
-            if (arr[i] > 0) {
-                charFrequency.push_back({i, arr[i]});
-            }
+        for(char c: s) m[c]++;
+
+        vector<pair<int,char>> pot;
+
+        for(auto ele: m){
+            pot.push_back({ele.second,ele.first});
         }
-        sort(charFrequency.begin(), charFrequency.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
-            return a.second > b.second;
+        
+        sort(pot.begin(),pot.end(), [](const pair<int,char> a, pair<int,char> b){
+            return a.first > b.first;
         });
 
-        // Build the sorted string
-        for (auto cf : charFrequency) {
-            ans += string(cf.second, char(cf.first));
+        for(auto ele: pot){
+            ans += string(ele.first, ele.second);
         }
 
         return ans;
